@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <title>Llistat d'Empreses</title>
+    <style>
+        /* Estil bàsic per a la taula i el formulari */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        #searchBar {
+            margin-bottom: 10px;
+            padding: 5px;
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Llistat d'Empreses</h1>
+<input type="text" id="searchBar" placeholder="Cerca per nom d'empresa o sector...">
+
+<table id="empresesTable">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Sector</th>
+            <th>Adreça</th>
+            <th>Telèfon</th>
+            <th>Email</th>
+            <th>Web</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Aquí es mostraran les empreses -->
+    </tbody>
+</table>
+
+<script>
+// Carregar l'XML i mostrar les dades
+fetch('empreses.xml')
+    .then(response => response.text())
+    .then(data => {
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(data, "application/xml");
+        const empreses = xml.getElementsByTagName("empresa");
+        const tableBody = document.getElementById("empresesTable").getElementsByTagName("tbody")[0];
+
+        // Afegir empreses a la taula
+        Array.from(empreses).forEach(empresa => {
+            const row = tableBody.insertRow();
+            row.insertCell(0).textContent = empresa.getElementsByTagName("nom")[0].textContent;
+            row.insertCell(1).textContent = empresa.getElementsByTagName("sector")[0].textContent;
+            row.insertCell(2).textContent = `${empresa.getElementsByTagName("carrer")[0].textContent}, ${empresa.getElementsByTagName("ciutat")[0].textContent}, ${empresa.getElementsByTagName("codiPostal")[0].textContent}`;
+            row.insertCell(3).textContent = empresa.getElementsByTagName("telefon")[0].textContent;
+            row.insertCell(4).textContent = empresa.getElementsByTagName("email")[0].textContent;
+            row.insertCell(5).innerHTML = `<a href="${empresa.getElementsByTagName("web")[0].textContent}" target="_blank">Visitar Web</a>`;
+        });
+    });
+
+// Funció per cercar a la taula
+document.getElementById('searchBar').addEventListener('input', function() {
+    const filter = this.value.toLowerCase();
+    const rows = document.querySelectorAll("#empresesTable tbody tr");
+
+    rows.forEach(row => {
+        const nom = row.cells[0].textContent.toLowerCase();
+        const sector = row.cells[1].textContent.toLowerCase();
+        row.style.display = nom.includes(filter) || sector.includes(filter) ? '' : 'none';
+    });
+});
+</script>
+
+</body>
+</html>

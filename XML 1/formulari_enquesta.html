@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enquesta</title>
+    <style>
+        /* Estil global */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #232526, #414345); /* Fons degradat fosc */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+        }
+
+        /* Contenidor del formulari */
+        .form-container {
+            background: linear-gradient(135deg, #141e30, #243b55); /* Fons brillant */
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: left;
+            color: #ddd;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #333;
+            background: #f4f4f4;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2) inset;
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border: 2px solid #00c6ff;
+            background: #e8f0fe;
+            color: #333;
+        }
+
+        textarea {
+            height: 80px;
+            resize: none;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #1e90ff, #00c6ff); /* Degradat brillant */
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        input[type="submit"]:hover {
+            background: linear-gradient(135deg, #00c6ff, #1e90ff); /* Canvi de degradat */
+            box-shadow: 0 5px 15px rgba(0, 198, 255, 0.5);
+        }
+
+        .form-footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #bbb;
+        }
+
+        .form-footer a {
+            color: #00c6ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animació d'aparició */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .form-container {
+            animation: fadeIn 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h1>Realitzar l'Enquesta</h1>
+    <form id="enquestaForm">
+        <label for="nomEmpresa">Nom de l'empresa:</label>
+        <input type="text" id="nomEmpresa" name="nomEmpresa" placeholder="Escriu el nom de l'empresa" required>
+
+        <label for="sector">Sector d'activitat:</label>
+        <input type="text" id="sector" name="sector" placeholder="Escriu el sector" required>
+
+        <label for="opinio">Opinió sobre els serveis:</label>
+        <textarea id="opinio" name="opinio" placeholder="Escriu la teva opinió" required></textarea>
+
+        <input type="submit" value="Enviar">
+    </form>
+
+    <div class="form-footer">
+        Necessites ajuda? <a href="#">Contacta'ns</a>
+    </div>
+</div>
+
+<script>
+    document.getElementById('enquestaForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        alert('Resposta enregistrada amb èxit!');
+        // Aquí pots afegir el codi per guardar les respostes en XML o enviar-les a un servidor.
+    });
+</script>
+
+</body>
+</html>
